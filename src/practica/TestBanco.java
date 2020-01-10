@@ -12,29 +12,41 @@ public class TestBanco {
 		Cuenta cuentaBeatriz = new Cuenta(62342, 100, beatriz);
  
 		/* Antonio y Beatriz consultan el saldo */
-		System.out.println("La cuenta de " + cuentaAntonio.getCliente().getNombre() + " tiene "
-				+ cuentaAntonio.getSaldo() + " euros.");
-		System.out.println("La cuenta de " + cuentaBeatriz.getCliente().getNombre() + " tiene "
-				+ cuentaBeatriz.getSaldo() + " euros.");
+		consultarSaldo(cuentaAntonio);
+		consultarSaldo(cuentaBeatriz);
  
 		/* Beatriz transfiere 50€ a Antonio */
-		cuentaBeatriz.setSaldo(cuentaBeatriz.getSaldo() - 50);
-		cuentaAntonio.setSaldo(cuentaAntonio.getSaldo() + 50);
- 
-		/* Antonio y Beatriz vuelven a consultar para comprobar que todo ha ido bien */
-		System.out.println("La cuenta de " + cuentaAntonio.getCliente().getNombre() + " tiene "
-				+ cuentaAntonio.getSaldo() + " euros.");
-		System.out.println("La cuenta de " + cuentaBeatriz.getCliente().getNombre() + " tiene "
-				+ cuentaBeatriz.getSaldo() + " euros.");
+		transferencia(cuentaAntonio, cuentaBeatriz, 50);
+		
+		/* Antonio y Beatriz consultan el saldo de nuevo */
+		consultarSaldo(cuentaAntonio);
+		consultarSaldo(cuentaBeatriz);
  
 		/* Antonio gana 100€ en una rifa y hace un ingreso en su cuenta */
-		cuentaAntonio.setSaldo(cuentaAntonio.getSaldo() + 100);
+		ingreso(cuentaAntonio, 100);
  
 		/* Beatriz tiene que pagar 30€ a hacienda y retira el dinero */
-		cuentaBeatriz.setSaldo(cuentaBeatriz.getSaldo() - 30);
+		retirada(cuentaBeatriz, 30);
  
 		/* Antonio transfiere 50€ a Beatriz */
-		cuentaAntonio.setSaldo(cuentaAntonio.getSaldo() - 50);
-		cuentaBeatriz.setSaldo(cuentaBeatriz.getSaldo() + 50);
+		transferencia(cuentaBeatriz, cuentaAntonio, 50);
+	}
+
+	private static void retirada(Cuenta cuentaBeatriz, Integer cantidad) {
+		cuentaBeatriz.setSaldo(cuentaBeatriz.getSaldo() - cantidad);
+	}
+
+	private static void ingreso(Cuenta cuentaAntonio, Integer cantidad) {
+		cuentaAntonio.setSaldo(cuentaAntonio.getSaldo() + cantidad);
+	}
+
+	private static void transferencia(Cuenta cuentaLlegada, Cuenta cuentaSalida, Integer cantidad) {
+		cuentaSalida.setSaldo(cuentaSalida.getSaldo() - cantidad);
+		cuentaLlegada.setSaldo(cuentaLlegada.getSaldo() + cantidad);
+	}
+
+	private static void consultarSaldo(Cuenta cuenta) {
+		System.out.println("La cuenta de " + cuenta.getCliente().getNombre() + " tiene "
+				+ cuenta.getSaldo() + " euros.");
 	}
 }
