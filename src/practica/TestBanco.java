@@ -1,16 +1,30 @@
 package practica;
-
+/**
+ * Clase de pruebas para consultar y modificar las cuentas
+ * @author josev
+ * @version 1.0.0
+ */
 public class TestBanco {
-
+	
 	public static void main(String[] args) {
+		/**
+		 * Creación de clientes
+		 */
 		/* Antonio y Beatriz se hacen cliente del banco */
 		Cliente antonio = new Cliente("123456789Z", "Antonio Alonso", "Av. Pueblo Saharaui, s/n");
 		Cliente beatriz = new Cliente("987654321A", "Beatriz Benítez", "Calle Sol, 4");
- 
+		System.out.println(antonio);
+		System.out.println(beatriz);
+		
+		/**
+		 * Creacion de cuentas con los clientes creados previamente
+		 */
 		/* Por defecto, todas las cuentas nuevas tienen 100€ */
 		Cuenta cuentaAntonio = new Cuenta(48151, 100, antonio);
 		Cuenta cuentaBeatriz = new Cuenta(62342, 100, beatriz);
- 
+		System.out.println(cuentaAntonio);
+		System.out.println(cuentaBeatriz);
+		
 		/* Antonio y Beatriz consultan el saldo */
 		consultarSaldo(cuentaAntonio);
 		consultarSaldo(cuentaBeatriz);
@@ -32,19 +46,36 @@ public class TestBanco {
 		transferencia(cuentaBeatriz, cuentaAntonio, 50);
 	}
 
-	private static void retirada(Cuenta cuentaBeatriz, Integer cantidad) {
-		cuentaBeatriz.setSaldo(cuentaBeatriz.getSaldo() - cantidad);
+	/**
+	 * Metodo para modificar el saldo de la cuenta al retirar dinero
+	 * @param cuenta
+	 * @param cantidad
+	 */
+	private static void retirada(Cuenta cuenta, Integer cantidad) {
+		cuenta.setSaldo(cuenta.getSaldo() - cantidad);
 	}
-
-	private static void ingreso(Cuenta cuentaAntonio, Integer cantidad) {
-		cuentaAntonio.setSaldo(cuentaAntonio.getSaldo() + cantidad);
+	/**
+	 * Metodo para modificar el saldo de la cuenta al ingresar dinero
+	 * @param cuenta
+	 * @param cantidad
+	 */
+	private static void ingreso(Cuenta cuenta, Integer cantidad) {
+		cuenta.setSaldo(cuenta.getSaldo() + cantidad);
 	}
-
+	/**
+	 * Metodo para modificar el saldo de la cuenta al realizar una transferencia, retirando dinero de una cuenta e ingresándolo en otra
+	 * @param cuentaLlegada
+	 * @param cuentaSalida
+	 * @param cantidad
+	 */
 	private static void transferencia(Cuenta cuentaLlegada, Cuenta cuentaSalida, Integer cantidad) {
 		cuentaSalida.setSaldo(cuentaSalida.getSaldo() - cantidad);
 		cuentaLlegada.setSaldo(cuentaLlegada.getSaldo() + cantidad);
 	}
-
+	/**
+	 * Metodo para consultar el saldo actual de una cuenta
+	 * @param cuenta
+	 */
 	private static void consultarSaldo(Cuenta cuenta) {
 		System.out.println("La cuenta de " + cuenta.getCliente().getNombre() + " tiene "
 				+ cuenta.getSaldo() + " euros.");
