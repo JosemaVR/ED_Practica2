@@ -5,7 +5,12 @@ package practica;
  * @version 1.0.0
  */
 public class TestBanco {
-	
+	/**
+	 * Constantes usadas durante el test
+	 */
+	private static final String EUROS = "euros";
+	private static final String PROPIETARIO = "La cuenta de ";
+
 	public static void main(String[] args) {
 		/**
 		 * Creación de clientes
@@ -48,25 +53,25 @@ public class TestBanco {
 
 	/**
 	 * Metodo para modificar el saldo de la cuenta al retirar dinero
-	 * @param cuenta
-	 * @param cantidad
+	 * @param cuenta referencia a la cuenta donde se realiza la retirada
+	 * @param cantidad cifra a disminuir en el saldo de la cuenta
 	 */
 	private static void retirada(Cuenta cuenta, Integer cantidad) {
 		cuenta.setSaldo(cuenta.getSaldo() - cantidad);
 	}
 	/**
 	 * Metodo para modificar el saldo de la cuenta al ingresar dinero
-	 * @param cuenta
-	 * @param cantidad
+	 * @param cuenta referencia a la cuenta donde se realiza el ingreso
+	 * @param cantidad cifra a aumentar en el saldo de la cuenta
 	 */
 	private static void ingreso(Cuenta cuenta, Integer cantidad) {
 		cuenta.setSaldo(cuenta.getSaldo() + cantidad);
 	}
 	/**
 	 * Metodo para modificar el saldo de la cuenta al realizar una transferencia, retirando dinero de una cuenta e ingresándolo en otra
-	 * @param cuentaLlegada
-	 * @param cuentaSalida
-	 * @param cantidad
+	 * @param cuentaLlegada referencia a la cuenta donde se realiza el ingreso
+	 * @param cuentaSalida referencia a la cuenta donde se realiza la retirada
+	 * @param cantidad cifra a mover de una cuenta a otra
 	 */
 	private static void transferencia(Cuenta cuentaLlegada, Cuenta cuentaSalida, Integer cantidad) {
 		cuentaSalida.setSaldo(cuentaSalida.getSaldo() - cantidad);
@@ -74,10 +79,10 @@ public class TestBanco {
 	}
 	/**
 	 * Metodo para consultar el saldo actual de una cuenta
-	 * @param cuenta
+	 * @param cuenta referencia a la cuenta consultada
 	 */
 	private static void consultarSaldo(Cuenta cuenta) {
-		System.out.println("La cuenta de " + cuenta.getCliente().getNombre() + " tiene "
-				+ cuenta.getSaldo() + " euros.");
+		System.out.println(PROPIETARIO + cuenta.getCliente().getNombre() + " tiene "
+				+ cuenta.getSaldo() + " " + EUROS);
 	}
 }
